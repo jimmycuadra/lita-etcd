@@ -51,13 +51,146 @@ end
 
 ### Setting
 
+To set a key:
+
+```
+Lita: etcd set KEY VALUE
+```
+
+To set a key with an expiration in seconds:
+
+```
+Lita: etcd set KEY VALUE --ttl SECONDS
+```
+
+To set a key only if it has a specific current value:
+
+```
+Lita: etcd set KEY VALUE --swap-with-value CURRENT_VALUE
+```
+
+To set a key only if it has a specific current index:
+
+```
+Lita: etcd set KEY VALUE --swap-with-index CURRENT_INDEX
+```
+
+To set a key only if it doesn't already exist:
+
+```
+Lita: etcd mk KEY VALUE
+```
+
+To create a directory only if it doesn't already exist:
+
+```
+Lita: etcd mkdir DIR
+```
+
+To update a key that must currently exist:
+
+```
+Lita: etcd update KEY VALUE
+```
+
+To create a directory unconditionally:
+
+```
+Lita: etcd setDir DIR
+```
+
 ### Getting
+
+To get the value of a key:
+
+```
+Lita: etcd get KEY
+```
+
+To get the value of a key, ensuring the read is not stale:
+
+```
+Lita: etcd get KEY --consistent
+```
 
 ### Listing
 
+To list the keys available at a path (or the root path if no path is specified):
+
+```
+Lita: etcd ls [PATH]
+```
+
+To list the keys available at a path, recursing into directories:
+
+```
+Lita: etcd ls --recursive
+```
+
+To list the keys available at a path, with trailing slashes after directories:
+
+```
+Lita: etcd ls -p
+```
+
 ### Deleting
 
+To delete a key:
+
+```
+Lita: etcd rm KEY
+```
+
+To delete a key or empty directory, the following two commands are equivalent:
+
+```
+Lita: etcd rmdir DIR
+Lita: etcd rm DIR --dir
+```
+
+To delete a directory recursively:
+
+```
+Lita: etcd rm DIR --recursive
+```
+
+To delete a key only if it has a specific current value:
+
+```
+Lita: etcd rm KEY --with-value CURRENT_VALUE
+```
+
+To delete a key only if it has a specific current index:
+
+```
+Lita: etcd rm KEY --with-index INDEX
+```
+
 ### Watching
+
+To watch a key and report the next change:
+
+```
+Lita: etcd watch KEY
+```
+
+To watch a directory and report the next change anywhere underneath it:
+
+```
+Lita: etcd watch DIR --recursive
+```
+
+To watch a key and report the next change, starting at a specific index:
+
+```
+Lita: etcd watch KEY --after-index INDEX
+```
+
+To watch a directory and report the next change anywhere underneath it, starting at a specific index:
+
+```
+Lita: etcd watch DIR --recursive --after-index INDEX
+```
 
 ## License
 
